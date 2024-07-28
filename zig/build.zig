@@ -4,6 +4,11 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
+    //-------------------------------------------------------------------------
+    // ZLS Dev Tool LSP
+    //  - can be skipped if you have zls installed globally
+    //-------------------------------------------------------------------------
+
     const zls = b.dependency("zls", .{}).artifact("zls");
     const zls_step = b.step("build-zls", "Build zls");
     b.installArtifact(zls);
@@ -11,8 +16,14 @@ pub fn build(b: *std.Build) void {
 
     const run_zls_step = b.step("zls", "Run zls");
     const run_zls = b.addRunArtifact(zls);
+    const install_zls = b.addInstallArtifact(zls, .{});
     run_zls_step.dependOn(&zls.step);
     run_zls_step.dependOn(&run_zls.step);
+    run_zls_step.dependOn(&install_zls.step);
+
+    //-------------------------------------------------------------------------
+    // Main App
+    //-------------------------------------------------------------------------
 
     const exe = b.addExecutable(.{
         .name = "my-app",
