@@ -1,0 +1,5 @@
+.direnv
+.supermaven
+.venv
+.mypy_cache
+**/__pycache__
