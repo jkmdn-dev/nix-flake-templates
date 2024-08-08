@@ -1,12 +1,10 @@
 ## The following requirements were added by pip freeze:
-certifi==2024.7.4
 distlib==0.3.8
 filelock==3.15.1
 mypy==1.10.1
 mypy_extensions==1.0.0
 pip==24.2
 platformdirs==4.2.2
-ruff==0.5.6
 setuptools==72.1.0
 types-setuptools==71.1.0.20240806
 typing_extensions==4.12.2
