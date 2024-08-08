@@ -4,9 +4,10 @@
   inputs = {
     nixpkgs = { url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz"; };
     zig-overlay = { url = "github:mitchellh/zig-overlay"; };
+    zls-overlay = { url = "github:zigtools/zls"; };
   };
 
-  outputs = { self, nixpkgs, zig-overlay }:
+  outputs = { self, nixpkgs, zig-overlay, zls-overlay }:
     let
       supportedSystems =
         [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
@@ -19,17 +20,17 @@
                 (final: prev:
                   let
                     zig = zig-overlay.packages.${system}.master;
-                  in { inherit zig; })
+                    zls = zls-overlay.packages.${system}.zls.overrideAttrs {
+                       zig = zig-overlay.packages.${system}.master;
+                    };
+                  in { inherit zig zls; })
               ];
             };
           });
     in {
       devShells = forEachSupportedSystem ({ pkgs }: {
-        default = pkgs.mkShell { packages = with pkgs; [ nil nixfmt zig ];  
-          shellHook = ''
-            zig build build-zls --release=fast
-          '';
-
+        default = pkgs.mkShell {
+          packages = with pkgs; [ nil nixfmt-rfc-style zig zls ];
         };
       });
     };
