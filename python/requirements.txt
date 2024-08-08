@@ -1,11 +1,27 @@
 ## The following requirements were added by pip freeze:
+asttokens==2.4.1
+decorator==5.1.1
 distlib==0.3.8
+executing==2.0.1
 filelock==3.15.1
+ipython==8.26.0
+jedi==0.19.1
+matplotlib-inline==0.1.7
 mypy==1.10.1
 mypy_extensions==1.0.0
+parso==0.8.4
+pexpect==4.9.0
 pip==24.2
 platformdirs==4.2.2
+prompt_toolkit==3.0.47
+ptyprocess==0.7.0
+pure_eval==0.2.3
+Pygments==2.18.0
 setuptools==72.1.0
+six==1.16.0
+stack-data==0.6.3
+traitlets==5.14.3
 types-setuptools==71.1.0.20240806
 typing_extensions==4.12.2
 virtualenv==20.26.2
+wcwidth==0.2.13
